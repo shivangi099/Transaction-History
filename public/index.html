@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Banking App</h1>
+  <div class="container">
+    <div class="left-side">
+      <form onsubmit="credit(event)">
+        <label for="creditAmount">Credit Amount:</label>
+        <input type="number" name="amount" id="creditAmount" required>
+        <button type="submit">Credit</button>
+      </form>
+      <form onsubmit="debit(event)">
+        <label for="debitAmount">Debit Amount:</label>
+        <input type="number" name="amount" id="debitAmount" required>
+        <button type="submit">Debit</button>
+      </form>
+    </div>
+    <div class="right-side">
+      <div id="balance">
+        <button onclick="getBalance()">Get Balance</button>
+        <p id="balanceValue"></p>
+      </div>
+      <div id="history">
+        <a href="history.html">Transaction History</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    function speakText(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
+    }
+
+    async function getBalance() {
+      const response = await fetch('/balance');
+      const balance = await response.text();
+      document.getElementById('balanceValue').innerText = balance;
+    }
+
+    async function credit(event) {
+      event.preventDefault();
+      const amount = parseFloat(document.getElementById('creditAmount').value);
+      if (isNaN(amount) || amount < 0) {
+        const errorMessage = 'Please enter a valid amount';
+        speakText(errorMessage);
+        alert(errorMessage);
+        return;
+      }
+
+      try {
+        const response = await fetch('/credit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ amount }),
+        });
+
+        if (response.ok) {
+          const message = await response.text();
+          speakText(message);
+          alert(message);
+        } else {
+          const error = await response.text();
+          speakText(error);
+          alert(error);
+        }
+      } catch (error) {
+        const errorMessage = 'Internal Server Error';
+        speakText(errorMessage);
+        alert(errorMessage);
+      }
+    }
+
+    async function debit(event) {
+      event.preventDefault();
+      const amount = parseFloat(document.getElementById('debitAmount').value);
+      if (isNaN(amount) || amount < 0) {
+        const errorMessage = 'Please enter a valid amount';
+        speakText(errorMessage);
+        alert(errorMessage);
+        return;
+      }
+
+      try {
+        const response = await fetch('/debit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ amount }),
+        });
+
+        if (response.ok) {
+          const message = await response.text();
+          
+          speakText(message);
+          alert(message);
+        } else {
+          const error = await response.text();
+          speakText(error);
+          alert(error);
+        }
+      } catch (error) {
+        const errorMessage = 'Internal Server Error';
+
+        speakText(errorMessage);
+        alert(errorMessage);
+      }
+    }
+  </script>
+</body>
+</html>

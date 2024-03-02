@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Transaction History</h1>
+  <div id="history">
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="historyList"></tbody>
+    </table>
+  </div>
+  <script>
+    async function getHistory() {
+      const response = await fetch('/history');
+      const transactions = await response.json();
+      const historyList = document.getElementById('historyList');
+      historyList.innerHTML = '';
+      transactions.forEach(transaction => {
+        const listItem = document.createElement('tr');
+        listItem.innerHTML = `
+          <td>${transaction.type}</td>
+          <td>${transaction.amount}</td>
+          <td>${new Date(transaction.timestamp).toLocaleString()}</td>
+        `;
+        historyList.appendChild(listItem);
+      });
+    }
+    getHistory(); // Automatically fetch history when page loads
+  </script>
+</body>
+</html>

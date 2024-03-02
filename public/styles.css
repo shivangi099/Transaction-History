@@ -1,0 +1,160 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 85%;
+    margin-right: 100px;
+    
+  }
+    
+    .left-side,
+    .right-side {
+      flex-basis: calc(45% - 1rem);
+      margin-bottom: 2rem;
+    }
+    
+    /* For smaller screens */
+    @media screen and (max-width: 768px) {
+      .left-side,
+      .right-side {
+        flex-basis: 90%;
+      }
+    }
+    h1 {
+      color: #eceff1;
+      margin-right: 80px;
+      margin-bottom: 3rem;
+    }
+    /* Layout */
+    body {
+      background-image: url("https://static.vecteezy.com/system/resources/previews/010/518/840/original/digital-finance-and-banking-service-in-futuristic-background-bank-building-with-online-payment-transaction-secure-money-and-financial-innovation-technology-vector.jpg");
+      background-position: center 42%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #eceff1;
+      padding: 2rem;
+    }
+    
+    form {
+      background-color: #fff;
+      
+      padding: 2rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      width: 150%;
+      max-width: 350px;
+    }
+    
+    form input {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 1.5rem;
+    }
+    
+    form button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.75rem 2rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    form button:hover {
+      background-color: #2980b9;
+    }
+    
+    #balance, #history {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 150%;
+      max-width: 350px;
+      text-align: center;
+    }
+    
+    #balance button, #history button {
+      margin-bottom: 1rem;
+    }
+    
+    #balanceValue {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #3498db;
+      margin-top: 1.5rem;
+    }
+    
+    #historyList {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    #historyList li {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+      padding: 0.5rem;
+    }
+  
+    #balance {
+      margin-bottom: 8rem;
+    }
+    
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #3498db;
+      color: #fff;
+    }
+  
+    @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      h1 {
+        animation: fadeIn 1s ease-in forwards;
+      }
+      
+      /* Add animation delays to the forms, balance box, and transaction history box */
+      form {
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
+        animation-delay: 0.8s; /* Display forms after the Banking App title */
+      }
+      
+      #balance {
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
+        animation-delay: 1s; /* Display Get Balance box after the forms */
+      }
+      
+      #history {
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
+        animation-delay: 1.4s; /* Display Transaction History box after the Get Balance box */
+      }
