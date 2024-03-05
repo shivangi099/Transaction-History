@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transactionhistory-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: your-app
+  template:
+    metadata:
+      labels:
+        app: your-app
+    spec:
+      containers:
+      - name: your-app-container
+        image: sharanya2112/docker-nodejs:latest
+        ports:
+          - containerPort: 3000
+        env:
+         - name: MONGODB_URI
+           value: "mongodb://docker:27017/transactionhistory"
+      - name: docker
+        image: mongo:latest
+        ports:
+           - containerPort: 27017
