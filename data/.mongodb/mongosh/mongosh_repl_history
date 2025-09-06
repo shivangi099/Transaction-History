@@ -1,0 +1,14 @@
+exit
+db.transactions.find().pretty()
+cd transactions:
+cd transactions.:
+cd transactions.
+cd transactions
+db.users.find().pretty()
+show collections
+show collection
+use transactionhistory
+show dbs
+db.users.find().pretty()
+show collections
+use database
